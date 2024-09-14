@@ -34,10 +34,10 @@ req.onload=function(){
     var data=JSON.parse(req.response)
    //console.log(data)
    data.forEach(country => {
-   // console.log(`Name: ${country.name.common}`);
-    //console.log(`Capital: ${country.capital }`);
-    //console.log(`Flag: ${country.flag}`);
-    //console.log('-------------------');
+    console.log(`Name: ${country.name.common}`);
+    console.log(`Capital: ${country.capital }`);
+    console.log(`Flag: ${country.flag}`);
+    console.log('-------------------');
 });
 }
 
@@ -51,9 +51,21 @@ req.send()
 req.onload=function(){
     var data=JSON.parse(req.response)
    //console.log(data)
-   var usdCountries = data.filter(country => 
-    country.currencies && country.currencies.USD
-).map((element)=>element.name.common)
-console.log(usdCountries)
+   let res= data.reduce((sum,element)=>sum+element.population,0)
+   console.log(res)
 };
 
+
+//Q5 Print the country that uses US dollars as currency.
+
+var req=new XMLHttpRequest();
+req.open('GET','https://restcountries.com/v3.1/all')
+req.send()
+req.onload=function(){
+    var data=JSON.parse(req.response)
+   //console.log(data)
+   var usdCountries = data.filter(country => 
+    country.currencies && country.currencies.USD).map((element)=>element.name.common)
+    console.log(usdCountries)
+  
+};
